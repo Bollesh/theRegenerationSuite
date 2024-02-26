@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Animation</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .hidden-text {
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .visible-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="hidden-text" id="animatedText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi voluptatem nam debitis dolorem? Quas alias quod, neque ducimus dolores corrupti veniam dolor quis eos incidunt dolorum tempore provident amet magni!</div>
+
+  <script>
+    // Add a class to trigger the animation after the page loads
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   const animatedText = document.getElementById('animatedText');
+    //   animatedText.classList.add('visible-text');
+    // });
+    window.addEventListener('click', ()=>{
+      const animatedText = document.getElementById('animatedText');
+       animatedText.classList.add('visible-text');
+    });
+  </script>
+</body>
+</html>

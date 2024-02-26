@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Annapurna+SIL&display=swap');
+
+body{
+    overflow: hidden; 
+    margin: 0;
+    background-color: rgb(32,32,32);
+    height: 100%;
+}
+
+#slideContainer, .buttons{
+    animation: loadFadeIn 0.75s linear;
+}
+
+#one{
+    animation: firstSlideFadeIn 0.5s;
+    filter: brightness(60%);
+}
+
+#slideContainer{
+    display: flex;
+    flex-wrap: wrap;
+    width: 800%;
+    z-index: -1;
+}
+
+.slide{
+    flex: 1;
+    height: 100vh;
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    filter: brightness(80%);
+}
+
+.buttons, .title{
+    position: absolute;
+    z-index: 2;
+    color: white;
+}
+
+.buttons{
+    font-family: 'Annapurna SIL', serif;
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    justify-content: space-between;
+    font-size: 3em;
+}
+
+span{
+    height: auto;
+    transform-origin: 50% 46%;
+    transition: transform 0.75s;
+}
+
+.left, .right{
+    display: grid;
+    height: 100vh;
+    width: 40vw;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes loadFadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes rotate{
+    from{
+        transform: rotate(0);
+    }
+    to{
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes zoomIn{
+    from{
+        background-size: 100%;
+    }
+    to{
+        background-size: 115%;
+    }
+}
