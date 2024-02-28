@@ -4,17 +4,41 @@
 body{
     overflow: hidden; 
     margin: 0;
-    background-color: rgb(32,32,32);
+    background-color: rgb(20,20,20);
     height: 100%;
+    font-family: Roboto;
 }
 
-#slideContainer, .buttons{
-    animation: loadFadeIn 0.75s linear;
+nav{
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    z-index: 2;
 }
 
-#one{
-    animation: firstSlideFadeIn 0.5s;
-    filter: brightness(60%);
+nav > a{
+    margin: 20px 15px;
+    text-decoration: none;
+    color: rgb(184, 184, 184);
+    transition: all 0.4s;
+}
+
+nav > a:hover{
+    cursor: pointer;
+    color: white;
+}
+
+nav > a:nth-child(1){
+    color: white;
+}
+
+.activeT.title{
+    animation: loadTitle 0.75s;
+    animation-delay: 0.4s;
+    transition-delay: 0.4s;
+    opacity: 1;
 }
 
 #slideContainer{
@@ -22,6 +46,7 @@ body{
     flex-wrap: wrap;
     width: 800%;
     z-index: -1;
+    transition: opacity 0.4s;
 }
 
 .slide{
@@ -31,14 +56,29 @@ body{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    filter: brightness(80%);
 }
 
-.buttons, .title{
+.buttons, .title, nav, footer{
     position: absolute;
     z-index: 2;
     color: white;
 }
+
+.title{
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: clamp(0.5rem, 2.8vw, 4rem);
+    opacity: 0;
+}
+
+.lastActive{
+    animation: unloadTitle 0.75s;
+}
+
+/* .activeT{
+    animation: ;
+} */
 
 .buttons{
     font-family: 'Annapurna SIL', serif;
@@ -50,10 +90,10 @@ body{
     font-size: 3em;
 }
 
-span{
+.buttons > div > span{
     height: auto;
     transform-origin: 50% 46%;
-    transition: transform 0.75s;
+    transition: transform 0.75s, font-size 0.4s;
 }
 
 .left, .right{
@@ -62,6 +102,46 @@ span{
     width: 40vw;
     justify-content: center;
     align-items: center;
+}
+
+footer{
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(1rem, 1.2vw, 4rem);
+    display: flex;
+    align-items: center;
+}
+
+footer > div{
+    width: 30px;
+    height: 0;
+    border: solid 0.1px;
+    top: 50%;
+    margin: 0 10px;
+}
+
+footer > span{
+    transition: all 0.3s;
+}
+
+.smallSlides{
+    position: absolute;
+    width: 30vw;
+    height: 30px;
+    bottom: 8%;
+    right: 5%;
+    display: flex;
+    gap: 5px;
+    z-index: 10;
+    transition: transform 1s, height 1s, width 1s, gap 1s;
+}
+
+.smallSlide{
+    flex: 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @keyframes loadFadeIn{
@@ -73,20 +153,30 @@ span{
     }
 }
 
-@keyframes rotate{
-    from{
-        transform: rotate(0);
-    }
+@keyframes titleFadeOut{
     to{
-        transform: rotate(90deg);
+        opacity: 0;;
     }
 }
 
-@keyframes zoomIn{
+@keyframes loadTitle{
     from{
-        background-size: 100%;
+        transform: translateX(-50%) translateY(20px);
+        opacity: 0;
     }
     to{
-        background-size: 115%;
+        transform: translateX(-50%) translateY(-50%);
+        opacity: 1;
+    }
+}
+
+@keyframes unloadTitle{
+    from{
+        transform: translateX(-50%) translateY(-50%);
+        opacity: 1;
+    }
+    to{
+        transform: translateX(-50%) translateY(-50px);
+        opacity: 0;
     }
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #follow-div {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: #3498db;
+      border-radius: 50%;
+      pointer-events: none; /* Allow clicking through the div */
+    }
+  </style>
+</head>
+<body>
+  <div id="follow-div"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const followDiv = document.getElementById("follow-div");
+
+      document.addEventListener("mousedown", function (event) {
+        // Check if the left mouse button is pressed (button code 0)
+        if (event.button === 0) {
+          followDiv.style.left = `${event.clientX}px`;
+          followDiv.style.top = `${event.clientY}px`;
+
+          const moveHandler = function (e) {
+            followDiv.style.left = `${e.clientX}px`;
+            followDiv.style.top = `${e.clientY}px`;
+          };
+
+          const upHandler = function () {
+            document.removeEventListener("mousemove", moveHandler);
+            document.removeEventListener("mouseup", upHandler);
+          };
+
+          document.addEventListener("mousemove", moveHandler);
+          document.addEventListener("mouseup", upHandler);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
