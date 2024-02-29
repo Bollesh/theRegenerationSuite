@@ -8,6 +8,7 @@ let mouseStart;
 let mouseFinish;
 let deltaMouse;
 let initialPosX;
+windowWidth = window.innerWidth;
 
 window.addEventListener('mousewheel',(event)=>{
     if(event.deltaY > 0){
@@ -61,25 +62,23 @@ window.addEventListener('keydown', (event)=>{
     }
 });
 
+window.addEventListener('resize', ()=>{
+    windowWidth = window.innerWidth;
+    // console.log(windowWidth);
+});
+
 window.addEventListener('mousedown', (event) => {
     mouseDown = true;
     if(mouseDown){
         mouseStart = event.clientX;
+        // console.log(mouseStart);
         smallSlidesCont.style.transitionDelay = "";
     }
 });
 window.addEventListener('mouseup', (event) => {
-    // if(scrollCount == 1){
-    //     console.log(event.clientX);
-    //     mouseFinish = event.clientX;
-    //     deltaMouse = mouseFinish - mouseStart;
-    //     console.log(deltaMouse);
-    //     let matrix = new WebKitCSSMatrix(window.getComputedStyle(smallSlidesCont).transform);
-    //     prevPos = matrix.m41;
-    //     smallSlidesCont.style.transform = `translateX(${prevPos + deltaMouse}px) translateY(-20vh)`;
-    // }
     mouseDown = false;
     mouseFinish = event.clientX;
+    // console.log(mouseFinish);
 });
 
 
@@ -87,13 +86,17 @@ window.addEventListener('mousemove', (event)=>{
     if(mouseDown){
         if(scrollCount == 1){
             mouseFinish = event.clientX;
-            deltaMouse = mouseFinish - mouseStart;
+            deltaMouse = (mouseFinish - mouseStart);
             let matrix = new WebKitCSSMatrix(window.getComputedStyle(smallSlidesCont).transform);
             prevPos = matrix.m41;
-            let moveBy = prevPos + deltaMouse;
-            if(moveBy){
-                smallSlidesCont.style.transform = `translateX(${moveBy}px) translateY(-20vh)`;
+            let moveBy = prevPos - deltaMouse;
+            let deltaMousePercentage = deltaMouse * 100 / windowWidth;
+            let prevPosPercentage = prevPos * 100 / windowWidth;
+            let moveByPercentage = prevPosPercentage + deltaMousePercentage;
+            if(moveBy < initialPosX){
+                console.log("pp");
             }
+            smallSlidesCont.style.transform = `translateX(${moveByPercentage}vw) translateY(-20vh)`;
         }
     }
 });
